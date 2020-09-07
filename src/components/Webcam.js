@@ -24,6 +24,22 @@ class Webcam extends React.Component{
         this.setState({labelSrc:"On Streaming"})
 
     }
+    async getFrontWebcam(){
+        
+        console.log("Empezando a ver la cosa");
+        let streamFunc=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"}})
+        console.log(streamFunc);
+        // this.state.videoSrc=streamFunc
+        this.setState({videoSrc : streamFunc})
+        console.log(this.state.videoSrc);
+        // console.log(this.state.videoSrc);
+        let video=document.getElementById("StreamContainer")
+        console.log("Ya cargado el stream");
+        video.srcObject=streamFunc
+
+        this.setState({labelSrc:"On Streaming"})
+
+    }
     takePicture(){
         console.log("Taking a Picture")
         let video=document.getElementById("StreamContainer")
@@ -51,8 +67,12 @@ class Webcam extends React.Component{
                     <span className="VideoStatus">{this.state.labelSrc}</span>
                 </div>
                 <video id="StreamContainer" className="StreamContainer" autoPlay={true} width="680px" height="510" playsInline={true}></video>
-                <button onClick={this.getWebcam.bind(this)}>Click for Stream</button>
-                <button onClick={this.takePicture}>Click for take a Pic</button>
+                <div className="ButtonDiv">
+                    <button onClick={this.getWebcam.bind(this)}>Click for Stream</button>
+                    <button onClick={this.getFrontWebcam.bind(this)}>Change Camera</button>
+                    <button onClick={this.takePicture}>Click for take a Pic</button>
+                </div>
+                
                 <canvas id="Canvas"></canvas>
             </div>
             

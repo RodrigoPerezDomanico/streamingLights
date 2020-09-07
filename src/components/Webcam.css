@@ -3,3 +3,7 @@
     flex-direction: column;
     align-items: flex-start;
 }
+.ButtonDiv{
+    display: flex;
+    justify-content: center;
+}
